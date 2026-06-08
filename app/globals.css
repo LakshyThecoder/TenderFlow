@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Geist Font - Modern Premium Font from jsDelivr CDN */
+@font-face {
+  font-family: 'Geist';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.2.0/dist/fonts/geist-sans/GeistVariableVF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('https://cdn.jsdelivr.net/npm/geist@1.2.0/dist/fonts/geist-mono/GeistMonoVariableVF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.09 0.005 250); /* #09090b - Pure Graphite Black */
+  --foreground: oklch(0.95 0.005 250); /* #f4f4f5 - High Contrast Off-White */
+  --card: oklch(0.12 0.005 250); /* #18181b - Pure Charcoal Card */
+  --card-foreground: oklch(0.95 0.005 250);
+  --popover: oklch(0.12 0.005 250);
+  --popover-foreground: oklch(0.95 0.005 250);
+  --primary: oklch(0.95 0.005 250); /* Zinc white for a unified neutral design */
+  --primary-foreground: oklch(0.09 0.005 250);
+  --secondary: oklch(0.16 0.005 250); /* #27272a */
+  --secondary-foreground: oklch(0.95 0.005 250);
+  --muted: oklch(0.16 0.005 250);
+  --muted-foreground: oklch(0.63 0.005 250); /* #71717a */
+  --accent: oklch(0.5 0.01 250); /* Muted slate for controls */
+  --accent-foreground: oklch(0.95 0.005 250);
+  --destructive: oklch(0.5 0.15 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.16 0.005 250); /* #27272a - Clean divider line */
+  --input: oklch(0.12 0.005 250);
+  --ring: oklch(0.5 0.01 250);
+  --chart-1: oklch(0.95 0.005 250);
+  --chart-2: oklch(0.63 0.005 250);
+  --chart-3: oklch(0.5 0.15 140);
+  --chart-4: oklch(0.6 0.1 200);
+  --chart-5: oklch(0.5 0.15 25);
+  --radius: 0.375rem; /* Precise developer small corner radius */
+}
+
+@theme inline {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Space Grotesk", monospace;
+  --font-display: "Inter", "Space Grotesk", sans-serif;
+  --font-heading: "Inter", "Space Grotesk", sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/30;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-zinc-800 selection:text-zinc-100;
+  }
+}
+
+.font-display {
+  font-family: "Inter", "Space Grotesk", sans-serif;
+  font-feature-settings: "ss01", "ss02";
+  letter-spacing: -0.02em;
+}
+
+.font-heading {
+  font-family: "Inter", "Space Grotesk", sans-serif;
+  font-feature-settings: "ss01", "ss02";
+  letter-spacing: -0.01em;
+}
+
+/* Premium text gradient effects */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, #ffffff 0%, #71717a 50%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Aceternity-style glow effects */
+.glow-text {
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+}
+
+.glow-border {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.05), inset 0 0 30px rgba(255, 255, 255, 0.02);
+}
+
+/* Hide scrollbar for clean UI layout */
+.scrollbar-hidden::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hidden,
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom scrollbars for spreadsheet tables */
+.glass-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+.glass-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.glass-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9999px;
+}
+.glass-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Flat Console Surfaces - inspired by Vercel/Linear */
+.console-panel {
+  background: #09090b;
+  border: 1px solid #18181b;
+}
+
+.console-card {
+  background: #09090b;
+  border: 1px solid #18181b;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.console-card:hover {
+  border-color: #27272a;
+  background: #0c0c0e;
+}
+
+/* Official Bid PDF Sheet styles */
+.pdf-sheet {
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #e2e8f0;
+}
+
+.pdf-stamp {
+  border: 1.5px solid #000000;
+  color: #000000;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transform: rotate(-2deg);
+  padding: 4px 8px;
+}
+
+/* Hologram Ingestion laser scan */
+@keyframes scan-laser {
+  0% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+.laser-line {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+  animation: scan-laser 2.5s infinite linear;
+}
+
+/* Sparklines */
+.sparkline-path {
+  stroke: #71717a;
+  stroke-width: 1.5px;
+  fill: none;
+}
+
+/* Spotlight Animation */
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%) translateY(-100%) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%) translateY(100%) scale(1.2);
+  }
+}
+
+.animate-spotlight {
+  animation: spotlight 8s ease-in-out infinite;
+}
+
+/* Glowing Effect for dark theme adjustments */
+.glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* Premium card hover glow */
+.card-glow {
+  position: relative;
+}
+
+.card-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+/* Premium Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(39, 39, 42, 0.3);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(82, 82, 91, 0.5);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(113, 113, 122, 0.7);
+}
+
+.glass-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.glass-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.glass-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.glass-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Premium Animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Gradient Text Effects */
+.text-gradient-premium {
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 50%, #ffffff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Premium Card Shadows */
+.shadow-premium {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -2px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.shadow-premium-hover {
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.4),
+    0 8px 10px -6px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Focus Ring Premium */
+.focus-ring-premium:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5), 0 0 0 4px #09090b;
+}
